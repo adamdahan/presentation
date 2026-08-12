@@ -601,7 +601,7 @@
 │
 └── docs/
     ├── payments/
-    │   ├── round-up-savings.md
+    │   ├── transaction-alerts.md
     │   └── settlement-webhooks.md
     ├── onboarding/
     └── notifications/</pre>
@@ -611,8 +611,8 @@
         <pre class="d-code"><span class="k">kind</span>: flow          <span class="c"># flow | mechanism</span>
 <span class="k">domain</span>: payments
 <span class="k">repos</span>: [mobile, backend]
-<span class="k">keywords</span>: round-up, settlement,
-          settlement webhook, rounding</pre>
+<span class="k">keywords</span>: transaction alert, settlement,
+          webhook, push notification</pre>
         <p class="d-foot">Because those are written down rather than baked into folder names, you can search by any of them — and if one turns out to be wrong, you change a word instead of moving the file and breaking every link to it.</p>
         <a class="d-link-out" href="file-reference.html">What every file does →</a>
       </div>
@@ -742,10 +742,10 @@
 <span class="k">verified_by</span>: adamd
 <span class="k">sources</span>:
   - repo: backend
-    path: src/services/round-up.service.ts
+    path: src/services/alerts.service.ts
     blob: a3f1c9e…      <span class="c">← fingerprint</span>
   - repo: mobile
-    path: src/features/savings/useRoundUp.ts
+    path: src/features/alerts/useAlerts.ts
     blob: 7d2b04a…
 
 <span class="c">--- body below ---</span>
@@ -769,7 +769,7 @@
         <div class="sq__lines">
           <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
         </div>
-        <div class="sq__msg" style="--a:0;--b:1"><span class="sq__lbl">how does round-up savings work? — no command needed</span><span class="sq__ln"></span><span class="sq__no">1</span></div>
+        <div class="sq__msg" style="--a:0;--b:1"><span class="sq__lbl">how does transaction alerts work? — no command needed</span><span class="sq__ln"></span><span class="sq__no">1</span></div>
         <div class="sq__msg" style="--a:1;--b:2"><span class="sq__lbl">search the list for those words</span><span class="sq__ln"></span><span class="sq__no">2</span></div>
         <div class="sq__msg rtl dashed" style="--a:1;--b:2"><span class="sq__lbl">one matching line</span><span class="sq__ln"></span><span class="sq__no">3</span></div>
         <div class="sq__msg" style="--a:1;--b:3"><span class="sq__lbl">read that single file</span><span class="sq__ln"></span><span class="sq__no">4</span></div>
@@ -841,7 +841,7 @@
         <div class="sq__lines">
           <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
         </div>
-        <div class="sq__msg" style="--a:0;--b:1"><span class="sq__lbl">opens a PR touching round-up.service.ts</span><span class="sq__ln"></span><span class="sq__no">1</span></div>
+        <div class="sq__msg" style="--a:0;--b:1"><span class="sq__lbl">opens a PR touching alerts.service.ts</span><span class="sq__ln"></span><span class="sq__no">1</span></div>
         <div class="sq__msg" style="--a:1;--b:2"><span class="sq__lbl">runs on every pull request</span><span class="sq__ln"></span><span class="sq__no">2</span></div>
         <div class="sq__msg" style="--a:2;--b:3"><span class="sq__lbl">do any documents rely on these files?</span><span class="sq__ln"></span><span class="sq__no">3</span></div>
         <div class="sq__msg rtl dashed" style="--a:2;--b:3"><span class="sq__lbl">one match</span><span class="sq__ln"></span><span class="sq__no">4</span></div>
