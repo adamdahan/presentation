@@ -1,0 +1,251 @@
+<title>What Every File Does</title>
+
+<style>
+  /* Self-contained: no scripts, no libraries, no network requests. */
+  :root {
+    --paper:  #FFFFFF;
+    --ink:    #111111;
+    --navy:   #12305B;
+    --wash:   #EDF1F7;
+    --grey:   #5C6472;
+    --rule:   #C8CED8;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  body {
+    background: #F4F5F7;
+    color: var(--ink);
+    font-family: var(--sans);
+    margin: 0;
+    padding: 28px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
+
+  .sheet {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 42px 52px 48px;
+    box-sizing: border-box;
+  }
+
+  .head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--grey);
+    border-bottom: 1px solid var(--rule); padding-bottom: 12px; margin-bottom: 26px;
+  }
+  .head a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .head a:hover { border-bottom-color: var(--navy); }
+
+  h1 { font-size: 34px; line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.02em; text-wrap: balance; }
+  h2 { font-size: 25px; line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.015em; }
+  .lead { font-size: 17px; line-height: 1.55; color: var(--grey); margin: 0; max-width: 74ch; }
+  .lead b { color: var(--ink); font-weight: 700; }
+
+  .trigger {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--navy); margin: 0 0 8px;
+  }
+  .when { font-size: 16px; line-height: 1.5; color: var(--grey); margin: 0 0 24px; max-width: 78ch; }
+  .when b { color: var(--ink); font-weight: 700; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th {
+    text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--grey); font-weight: 400;
+    border-bottom: 2px solid var(--navy); padding: 0 14px 9px 0; vertical-align: bottom;
+  }
+  td { border-bottom: 1px solid var(--rule); padding: 15px 14px 15px 0; vertical-align: top; line-height: 1.5; }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child, th:first-child { width: 46px; padding-right: 10px; }
+  td:nth-child(2), th:nth-child(2) { width: 27%; }
+
+  .n { font-family: var(--mono); font-size: 13px; color: var(--navy); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .f { font-family: var(--mono); font-size: 13.5px; line-height: 1.45; word-break: break-word; }
+  .f .dim { color: var(--grey); }
+  td b { font-weight: 700; }
+  .ai { color: var(--navy); font-weight: 700; }
+
+  .tag {
+    display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--grey); border: 1px solid var(--rule);
+    padding: 2px 7px; margin-top: 7px; white-space: nowrap;
+  }
+
+  .note {
+    background: var(--wash); border-left: 3px solid var(--navy);
+    padding: 16px 20px; font-size: 15.5px; line-height: 1.55; margin: 26px 0 0;
+  }
+  .note b { font-weight: 700; }
+
+  .foot { font-size: 14px; line-height: 1.5; color: var(--grey); margin: 22px 0 0; max-width: 82ch; }
+  .foot b { color: var(--ink); font-weight: 700; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+
+  @media (max-width: 860px) {
+    .sheet { padding: 28px 22px 32px; }
+    .cols { grid-template-columns: 1fr; gap: 20px; }
+    table, .wrap { font-size: 14px; }
+    td:nth-child(2), th:nth-child(2) { width: auto; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: 0; padding: 0 0 14mm; break-inside: avoid; }
+    .head a { display: none; }
+  }
+</style>
+
+<div class="wrap">
+
+  <section class="sheet">
+    <div class="head"><span>Appendix · File Reference</span><a href="index.html">← back to the deck</a></div>
+    <h1>What every file does, in the order it happens.</h1>
+    <p class="lead">There is no single top-to-bottom order — there are <b>three separate chains</b>, and which one runs depends on what somebody just did. Only one file in the whole system uses an AI, and it is the last one in the last chain.</p>
+  </section>
+
+  <section class="sheet">
+    <div class="head"><span>Chain 1 · Somebody asks a question</span><span>all day, every day</span></div>
+    <h2>“How does completing a todo work?”</h2>
+    <p class="when">Typed into Copilot Chat. <b>No command, nothing to remember.</b></p>
+    <table>
+      <tr><th>#</th><th>File</th><th>What it does</th></tr>
+      <tr>
+        <td class="n">1</td>
+        <td class="f">.github/<b>copilot-instructions.md</b></td>
+        <td><b>The rulebook Copilot reads before every single answer.</b> Nobody switches it on. It says: search the list first, open only the one document that matches, check whether it is still trustworthy, and tell the person where the answer came from.</td>
+      </tr>
+      <tr>
+        <td class="n">2</td>
+        <td class="f">index/<b>manifest.tsv</b></td>
+        <td><b>The card catalogue.</b> One line per document — where it lives, what it covers, and the words somebody would search for. Copilot <i>searches</i> this and never reads the whole thing, which is why a lookup costs the same with 20 documents or 20,000.<span class="tag">generated</span></td>
+      </tr>
+      <tr>
+        <td class="n">3</td>
+        <td class="f">docs/<span class="dim">&lt;area&gt;/&lt;name&gt;</span>.md</td>
+        <td><b>The actual explanation.</b> One file is opened. The others are never touched.</td>
+      </tr>
+      <tr>
+        <td class="n">—</td>
+        <td class="f">.github/skills/…/<b>SKILL.md</b></td>
+        <td><b>A spare copy of the same rules</b>, in the format some AI tools expect instead of an instructions file. Belt and braces — whichever one the tool reads, it gets the same procedure.</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="head"><span>Chain 2 · Somebody writes a document</span><span>occasionally, and voluntarily</span></div>
+    <h2>They just built a feature and typed <code style="font-family:var(--mono)">/trace</code></h2>
+    <p class="when">This is the only chain that needs the <b>three-folder workspace</b>.</p>
+    <table>
+      <tr><th>#</th><th>File</th><th>What it does</th></tr>
+      <tr>
+        <td class="n">1</td>
+        <td class="f">.github/prompts/<b>trace.prompt.md</b></td>
+        <td><b>The <code style="font-family:var(--mono)">/trace</code> recipe.</b> Tells the assistant exactly how: look at what changed in both repos, follow the whole path through the code, <b>ask the person what surprised them</b>, then write the document along with the list of code files it was based on.</td>
+      </tr>
+      <tr>
+        <td class="n">2</td>
+        <td class="f">tools/<b>build-index.mjs</b></td>
+        <td><b>Rebuilds the catalogue.</b> Reads every document and writes out <code style="font-family:var(--mono)">manifest.tsv</code>, <code style="font-family:var(--mono)">watchers.json</code>, and the table in the README. Run at the end of <code style="font-family:var(--mono)">/trace</code> so the new document is findable straight away.</td>
+      </tr>
+      <tr>
+        <td class="n">3</td>
+        <td class="f">.github/workflows/<b>build-index.yml</b></td>
+        <td><b>Does that again automatically</b> once the change is merged, in case somebody forgot. The catalogue is never allowed to be hand-edited or out of date.</td>
+      </tr>
+      <tr>
+        <td class="n">4</td>
+        <td class="f">.github/workflows/<b>mirror-docs.yml</b></td>
+        <td><b>Copies everything into the app and server repos</b> so developers get it without downloading anything new. Also keeps it out of the shipped app and stamps the copies read-only.</td>
+      </tr>
+      <tr>
+        <td class="n">—</td>
+        <td class="f"><b>README.md</b></td>
+        <td><b>The human-readable index.</b> Generated, not written — it used to be kept by hand and quietly went out of date, so now it is built from the documents themselves.<span class="tag">generated</span></td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="sheet">
+    <div class="head"><span>Chain 3 · Somebody changes code</span><span>all day, every day</span></div>
+    <h2>This is the half that keeps the documents honest.</h2>
+    <p class="when">Nobody asks for any of this. It happens because code moved.</p>
+    <table>
+      <tr><th>#</th><th>File</th><th>What it does</th></tr>
+      <tr>
+        <td class="n">1</td>
+        <td class="f">index/<b>watchers.json</b></td>
+        <td><b>A reverse lookup: “which documents rely on this file?”</b> Used the moment a pull request opens, to comment telling the author which explanations their change affects. It asks nothing of them.<span class="tag">generated</span></td>
+      </tr>
+      <tr>
+        <td class="n">2</td>
+        <td class="f">templates/<b>docs-guard.yml</b></td>
+        <td><b>A guard installed in the app and server repos.</b> Stops somebody editing the mirrored copies — those get overwritten, so their work would silently vanish. Fails the pull request and points them at the right place instead.</td>
+      </tr>
+      <tr>
+        <td class="n">3</td>
+        <td class="f">.github/workflows/<b>check-fingerprints.yml</b></td>
+        <td><b>The alarm clock.</b> Runs the checker below on a schedule — or the moment code merges, if you would rather not wait for the night.</td>
+      </tr>
+      <tr>
+        <td class="n">4</td>
+        <td class="f">tools/<b>check-fingerprints.mjs</b></td>
+        <td><b>The checker.</b> Every document lists the code files it was written from plus a fingerprint of each. This asks GitHub for the current fingerprints — <b>one request per repository, not one per file</b> — and compares. Anything that moved is marked out of date.<span class="tag">no ai</span></td>
+      </tr>
+      <tr>
+        <td class="n">5</td>
+        <td class="f">.github/workflows/<b>repair-documents.yml</b></td>
+        <td><b>The repair job.</b> Runs the two below, then opens a single pull request.</td>
+      </tr>
+      <tr>
+        <td class="n">6</td>
+        <td class="f">tools/<b>propose-repair.mjs</b></td>
+        <td><b>Works out what changed and who did it.</b> Updates the fingerprints, pulls up the real code diff, and finds who last touched the file so the review lands on the right person. Marks the document <b>“needs review”, never “verified”</b> — refreshing a fingerprint is not the same as somebody having re-read the words.<span class="tag">no ai</span></td>
+      </tr>
+      <tr>
+        <td class="n">7</td>
+        <td class="f">tools/<b>agent-repair.mjs</b></td>
+        <td><span class="ai">The only file that uses an AI.</span> Reads the code change beside the old explanation and rewrites the sentences that are no longer true — quoting each one back, so you can see exactly what people had been believing. Only this can promote a document to “verified”, and only when nothing is left unresolved.<span class="tag">ai</span></td>
+      </tr>
+      <tr>
+        <td class="n">—</td>
+        <td class="f">.github/prompts/<b>verify.prompt.md</b></td>
+        <td><b>The <code style="font-family:var(--mono)">/verify</code> recipe</b> — the same job as steps 6 and 7, done by hand in the editor when you want it now. <b>This is what you use instead if you would rather nothing ran unattended.</b></td>
+      </tr>
+    </table>
+    <p class="note"><b>Steps 4, 6 and 7 are three separate things, and only the last needs an AI.</b> Drop step 7 entirely and you still get the detection, the flags, the refreshed fingerprints, and a pull request quoting your own diff, assigned to you. You would just fix the wording yourself — with <code style="font-family:var(--mono)">/verify</code>, in the editor, using the Copilot seat you already pay for.</p>
+  </section>
+
+  <section class="sheet">
+    <div class="head"><span>Two folders you never touch</span><span>rebuilt every time</span></div>
+    <div class="cols">
+      <div>
+        <h2>index/manifest.tsv</h2>
+        <p class="lead">Document → where it is, what it covers, what to search for.<br><br>Answers <b>“where do I find out about X?”</b></p>
+      </div>
+      <div>
+        <h2>index/watchers.json</h2>
+        <p class="lead">Code file → which documents depend on it.<br><br>Answers <b>“if I change this, what goes out of date?”</b></p>
+      </div>
+    </div>
+    <p class="foot">Same information, pointing in opposite directions. Both are generated from the documents on every change — <b>neither is ever edited by hand</b>, because a hand-maintained index is exactly the thing that silently drifts and stops being trusted.</p>
+  </section>
+
+  <section class="sheet">
+    <div class="head"><span>The one-paragraph version</span><span>—</span></div>
+    <table>
+      <tr><th>Count</th><th>What</th><th></th></tr>
+      <tr><td class="n">3</td><td class="f">instruction files</td><td>Tell an AI what to do — one for answering questions, one for writing a new document, one for fixing an old one.</td></tr>
+      <tr><td class="n">4</td><td class="f">small scripts</td><td>Do the mechanical work — build the catalogue, check the fingerprints, work out what changed, rewrite the prose.</td></tr>
+      <tr><td class="n">4</td><td class="f">workflows</td><td>Decide when those scripts run — on merge, on a schedule, or on a button.</td></tr>
+      <tr><td class="n">1</td><td class="f"><span class="ai">needs an AI</span></td><td>And it is the last one in the chain. Everything before it is plain comparison.</td></tr>
+    </table>
+    <p class="foot"><b>No plugin, no product, no licence.</b> Ordinary files sitting in a repository, which is why every assistant that opens the folder picks them up without anyone installing anything.</p>
+  </section>
+
+</div>
